@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Cortex Origin"
+run/main_scene="res://scenes/world/Intro.tscn"
 config/icon="res://icon.png"
 
 [autoload]

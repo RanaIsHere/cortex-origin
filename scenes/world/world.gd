@@ -2,6 +2,7 @@ extends Node2D
 
 func _ready():
 	Globals.playerTemperature = 16
+	Globals.canMove = true
 
 func _process(delta):
 	var tm = $worldMap.world_to_map($Player.global_position)
