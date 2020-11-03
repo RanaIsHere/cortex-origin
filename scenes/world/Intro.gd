@@ -2,9 +2,8 @@ extends Node2D
 
 var isSceneComplete = false
 var isCutscene = false
-var a = false
-var c = 1
-var b = false
+var a = -1
+var year = 2020
 
 func _ready():
 	$Player.global_position = $Position2D.global_position
@@ -16,6 +15,15 @@ func _ready():
 func _process(delta):
 	if isCutscene == true:
 		Globals.canMove = false
+	
+	$GUI/Control/Label.text = "Year: " + str(year)
+	
+	if a == 0:
+		if year > 1980:
+			year -= 1
+	if a == 1:
+		if year > 0:
+			year -= 15
 	
 func _on_Machine_body_entered(body):
 	if body.name == "Player":
@@ -31,15 +39,22 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$Start.start()
 		
 	if anim_name == "disappear":
-		get_tree().change_scene("")
+		$AudioStreamPlayer.playing = true
+		
+		yield($AudioStreamPlayer, "finished")
+		
+		get_tree().change_scene("res://scenes/world/world.tscn")
 	
 func _on_Start_timeout():
 	$Machine/TimeMachine.speed_scale = 0.5
+	a = 0
 	$End.start()
 
 
 func _on_End_timeout():
 	$Machine/TimeMachine.speed_scale = 4
+	$Machine.modulate = Color(0.98, 0.617, 0.9, 1)
+	a = 1
 	$Change.start()
 
 
