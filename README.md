@@ -11,9 +11,14 @@ However, one little problem has surfaced. Anomaly runs rampant on the surface of
 
 # Credits:
 Font: Silver by Poppy Works
-Audio:
-Arts: SirRana/Rana Rosihan
+Audio/Arts: SirRana/Rana Rosihan
 Programming: SirRana/Rana Rosihan
+
+Made for Game off 2020 Jam:
+Link to Jam:
+https://itch.io/jam/game-off-2020
+Link to game page:
+https://sirrana.itch.io/cortex-origin
 
 # Release:
 Linux and Windows, 32 bit and 64bit.
