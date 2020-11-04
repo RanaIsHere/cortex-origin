@@ -12,7 +12,7 @@ var playerThirst = 50
 var playerHunger = 50
 var playerAnomaly = 0
 
-var playerTemperature = 16
+var playerTemperature = 50
 
 var playerEquipment = "labcoat"
 

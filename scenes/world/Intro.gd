@@ -8,7 +8,7 @@ var year = 2020
 func _ready():
 	$Player.global_position = $Position2D.global_position
 	Globals.isIntro = true
-	Globals.playerTemperature = 14
+	Globals.playerTemperature = 50
 	$Machine/CollisionShape2D.set_deferred("disabled", true)
 	$Precaution.start()
 	

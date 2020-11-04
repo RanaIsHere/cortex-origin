@@ -62,11 +62,22 @@ func _physics_process(delta):
 		get_input(delta)
 	
 	if Globals.isIntro == false:
-		if Globals.playerHunger > 0:
-			Globals.playerHunger -= 0.01 / 2
-		if Globals.playerThirst > 0:
-			Globals.playerThirst -= 0.01 / 8
-		
+		if not Globals.playerTemperature > 61 or not Globals.playerTemperature < 39:
+			if Globals.playerHunger > 0:
+				Globals.playerHunger -= 0.01 / 2
+			if Globals.playerThirst > 0:
+				Globals.playerThirst -= 0.01 / 8
+		elif Globals.playerTemperature > 61:
+			if Globals.playerHunger > 0:
+				Globals.playerHunger -= 0.01 / 4
+			if Globals.playerThirst > 0:
+				Globals.playerThirst -= 0.01 / 2
+		elif Globals.playerTemperature < 39:
+			if Globals.playerHunger > 0:
+				Globals.playerHunger -= 0.01 / 2
+			if Globals.playerThirst > 0:
+				Globals.playerThirst -= 0.01 / 4
+				
 		if Globals.playerThirst < 0:
 			Globals.playerThirst = 0
 		if Globals.playerHunger < 0:

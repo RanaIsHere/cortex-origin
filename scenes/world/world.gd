@@ -1,11 +1,15 @@
 extends Node2D
 
 var treeInst = preload("res://sprites/object/ForestTree.tscn")
+var forestTemp = 50
 
 func _ready():
-	Globals.playerTemperature = 16
+	Globals.playerTemperature = 50
 	Globals.canMove = true
 	Globals.isIntro = false
+	
+	$worldMap/Forests.visible = true
+	$worldMap/Forests2.visible = true
 	
 	if Globals.isFirstDoor == true:
 		$worldMap.set_cellv(Vector2(14, 11), 0)
@@ -16,24 +20,16 @@ func _ready():
 
 func _process(delta):
 	var tm = $worldMap.world_to_map($Player.global_position)
-	var tl = $worldMap.get_cellv(Vector2(tm.x, tm.y)) 
+	var tl = $worldMap.get_cellv(Vector2(tm.x, tm.y))
 	
-	if get_tree().get_nodes_in_group("trees").size() < 24:
-		var t = treeInst.instance()
-		
-		$worldMap/Tree.add_child(t)
-		t.add_to_group("trees")
-		
-		var treeMap = $worldMap.world_to_map(t.position)
-		var tileTree = $worldMap.get_cellv(Vector2(treeMap.x, treeMap.y))
-		
-		if tileTree == -1 and tileTree == 2 and tileTree == 3 and tileTree == 4 and tileTree == 5: 
-			t.position = Vector2(randi() % 1024, randi() % 768)
-		else:
-			t.position = Vector2(randi() % 1024, randi() % 768)
-			
+	if get_tree().get_nodes_in_group("trees").size() < 250:
+		forestTemp = 60
+	else:
+		forestTemp = 50
 	
-
+	
+	
+	
 func _on_checker_body_entered(body):
 	if body.name == "Player":
 		Globals.playerEquipment = "unclothed"
@@ -52,14 +48,28 @@ func _on_doorOpener_body_entered(body):
 		
 			$worldMap/doorOpener.queue_free()
 
+		
+			
 
 
-func _on_Tree_body_entered(body):
+func _on_Forests_body_entered(body):
 	if body.name == "Player":
-		print(get_tree().get_nodes_in_group("trees").size())
-		#if get_tree().get_nodes_in_group("trees").size() != 30:
-			#var t = treeInst.instance()
-			
-			#$worldMap/Tree.add_child(t)
-			#t.position = Vector2(randi() % 784, randi() % 701)
-			
+		$worldMap/Forests.visible = true
+		Globals.playerTemperature = forestTemp
+
+func _on_Forests_body_exited(body):
+	if body.name == "Player":
+		$worldMap/Forests.visible = false
+		Globals.playerTemperature = 50
+
+
+func _on_Forests2_body_entered(body):
+	if body.name == "Player":
+		$worldMap/Forests2.visible = true
+		Globals.playerTemperature = forestTemp
+
+
+func _on_Forests2_body_exited(body):
+	if body.name == "Player":
+		$worldMap/Forests2.visible = false
+		Globals.playerTemperature = 50

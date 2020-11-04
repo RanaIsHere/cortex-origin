@@ -12,13 +12,29 @@ func _process(_delta):
 	
 	if Globals.playerHealth < $HealthBar.value:
 		$HealthBar.value -= 1
+	if Globals.playerHealth > $HealthBar.value:
+		$HealthBar.value += 1
 		
 	if Globals.playerHunger < $HungerBar.value:
 		$HungerBar.value -= 0.01
+	if Globals.playerHunger > $HungerBar.value:
+		$HungerBar.value += 0.01
 		
 	if Globals.playerHunger < $ThirstBar.value:
 		$ThirstBar.value -= 0.01
+	if Globals.playerHunger > $ThirstBar.value:
+		$ThirstBar.value += 0.01	
+			
+	if Globals.playerTemperature < $TemperatureBar.value:
+		$TemperatureBar.value -= 1	
+	if Globals.playerTemperature > $TemperatureBar.value:
+		$TemperatureBar.value += 1
 		
+	if Globals.playerAnomaly < $AnomalyBar.value:
+		$AnomalyBar.value -= 1
+	if Globals.playerAnomaly > $AnomalyBar.value:
+		$AnomalyBar.value += 1
+	
 	$Wood/WoodLabel.text = "Wood: " + str(Globals.wood)
 	$Metal/MetalLabel.text = "Metal: " + str(Globals.metal)
 	$Meat/MeatLabel.text = "Meat: " + str(Globals.rawMeat)
