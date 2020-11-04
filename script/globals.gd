@@ -21,3 +21,4 @@ var canMove = true
 var isIntro = false
 
 # World
+var isFirstDoor : bool = false

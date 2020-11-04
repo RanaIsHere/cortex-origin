@@ -60,13 +60,22 @@ func get_input(var delta):
 func _physics_process(delta):
 	if Globals.canMove == true:
 		get_input(delta)
+	
+	if Globals.isIntro == false:
+		if Globals.playerHunger > 0:
+			Globals.playerHunger -= 0.01 / 2
+		if Globals.playerThirst > 0:
+			Globals.playerThirst -= 0.01 / 8
 		
-	if Globals.playerHunger > 0:
-		Globals.playerHunger -= 0.01 / 2
-	if Globals.playerThirst > 0:
-		Globals.playerThirst -= 0.01 / 8
+		if Globals.playerThirst < 0:
+			Globals.playerThirst = 0
+		if Globals.playerHunger < 0:
+			Globals.playerHunger = 0
 		
-		print(Globals.playerHunger)
+		if Globals.playerThirst <= 0 or Globals.playerHunger <= 0:
+			Globals.playerHealth -= 1
+			
+		#print(Globals.playerHunger)
 
 func _on_rangeArea_body_entered(body):
 	if body.is_in_group("trees"):

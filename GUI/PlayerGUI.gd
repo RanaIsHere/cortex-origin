@@ -14,10 +14,10 @@ func _process(_delta):
 		$HealthBar.value -= 1
 		
 	if Globals.playerHunger < $HungerBar.value:
-		$HungerBar.value -= 0.2
+		$HungerBar.value -= 0.01
 		
 	if Globals.playerHunger < $ThirstBar.value:
-		$ThirstBar.value -= 0.2
+		$ThirstBar.value -= 0.01
 		
 	$Wood/WoodLabel.text = "Wood: " + str(Globals.wood)
 	$Metal/MetalLabel.text = "Metal: " + str(Globals.metal)
