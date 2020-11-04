@@ -1,5 +1,10 @@
 extends Node
 
+# Inventory System
+var inventory : Array = []
+var wood : int = 0
+var metal : int = 0
+var rawMeat : int = 0
 
 # Player
 var playerHealth = 100

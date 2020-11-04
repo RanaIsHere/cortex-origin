@@ -26,10 +26,23 @@ func get_input(var delta):
 		
 	if Input.is_action_just_pressed("interact"): # Break, Use
 		if treecollider != null:
-			treecollider.durability -= 1
-			treecollider.get_node_or_null("axeSound").playing = true
+			if treecollider.allowMined == true:
+				treecollider.durability -= 1
+				treecollider.get_node_or_null("axeSound").playing = true
+			
 			print(treecollider.durability)
 		
+	
+	
+	if treecollider != null:
+		if treecollider.isBreak == true:
+			if $pickUp.playing == false:
+				$pickUp.playing = true
+			
+			Globals.wood += treecollider.woodYield
+			treecollider.queue_free()
+				
+				
 	if velocity != Vector2.ZERO:
 		if Globals.playerEquipment == "unclothed":
 			$AnimatedSprite.animation = "walk-unclothed"
@@ -47,6 +60,13 @@ func get_input(var delta):
 func _physics_process(delta):
 	if Globals.canMove == true:
 		get_input(delta)
+		
+	if Globals.playerHunger > 0:
+		Globals.playerHunger -= 0.01 / 2
+	if Globals.playerThirst > 0:
+		Globals.playerThirst -= 0.01 / 8
+		
+		print(Globals.playerHunger)
 
 func _on_rangeArea_body_entered(body):
 	if body.is_in_group("trees"):

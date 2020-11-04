@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://tiles/world/grass/forest-grass-dirt.png" type="Texture" id=1]
 [ext_resource path="res://tiles/world/metal/metal-door.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/world/world.gd" type="Script" id=8]
 [ext_resource path="res://sprites/object/crystalCheck.png" type="Texture" id=9]
 [ext_resource path="res://sprites/object/ForestTree.tscn" type="PackedScene" id=10]
+[ext_resource path="res://GUI/PlayerGUI.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -187,7 +188,7 @@ __meta__ = {
 position = Vector2( 435.905, 166.002 )
 scale = Vector2( 3.274, 3.274 )
 frames = SubResource( 14 )
-frame = 7
+frame = 6
 speed_scale = 0.5
 playing = true
 
@@ -365,5 +366,7 @@ position = Vector2( 198.913, 615.998 )
 position = Vector2( 435.439, 162.098 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="PlayerGUI" parent="GUI" instance=ExtResource( 11 )]
 [connection signal="body_entered" from="worldMap/doorOpener" to="." method="_on_doorOpener_body_entered"]
 [connection signal="body_entered" from="worldMap/checker" to="." method="_on_checker_body_entered"]
