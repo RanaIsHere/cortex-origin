@@ -45,6 +45,19 @@ func _process(_delta):
 		if mainResourcePick > 2:
 			mainResourcePick = 0
 	
+	if Input.is_action_just_pressed("harvest"):
+		if Globals.harvestMode == false:
+			Globals.harvestMode = true
+			$HarvestMode.text = "Harvest Mode: On"
+			return
+			
+		if Globals.harvestMode == true:
+			Globals.harvestMode = false
+			$HarvestMode.text = "Harvest Mode: Off"
+			return
+		
+	#print(Globals.harvestMode)
+	
 	match mainResourcePick:
 		0:
 			$Wood.visible = true

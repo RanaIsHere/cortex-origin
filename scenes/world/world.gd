@@ -4,7 +4,7 @@ var treeInst = preload("res://sprites/object/ForestTree.tscn")
 var forestTemp = 50
 
 func _ready():
-	Globals.playerTemperature = 50
+	Globals.playerTemperature = forestTemp
 	Globals.canMove = true
 	Globals.isIntro = false
 	
@@ -21,11 +21,19 @@ func _ready():
 func _process(delta):
 	var tm = $worldMap.world_to_map($Player.global_position)
 	var tl = $worldMap.get_cellv(Vector2(tm.x, tm.y))
+	Globals.aboveTileMap = tl
 	
 	if get_tree().get_nodes_in_group("trees").size() < 250:
 		forestTemp = 60
 	else:
 		forestTemp = 50
+		
+	if tl == 6:
+		Globals.playerSpeed = 100
+		Globals.playerTemperature = 35
+	else:
+		Globals.playerSpeed = 200
+		Globals.playerTemperature = forestTemp
 	
 	
 	
@@ -47,9 +55,6 @@ func _on_doorOpener_body_entered(body):
 			Globals.isFirstDoor = true
 		
 			$worldMap/doorOpener.queue_free()
-
-		
-			
 
 
 func _on_Forests_body_entered(body):

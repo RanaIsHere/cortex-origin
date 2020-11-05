@@ -1,7 +1,8 @@
 extends Node
 
 # Inventory System
-var inventory : Array = []
+var inventory : Array = ["Grass", "Stone", "Dirt", "Rock"]
+var itemHotbar : Array = ["Sword", "Pickaxe"]
 var wood : int = 0
 var metal : int = 0
 var rawMeat : int = 0
@@ -20,5 +21,8 @@ var playerSpeed = 200
 var canMove = true
 var isIntro = false
 
+var harvestMode = false
+
 # World
 var isFirstDoor : bool = false
+var aboveTileMap = null

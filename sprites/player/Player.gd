@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var velocity = Vector2.ZERO
 var treecollider = null
+var isInventory = false
 
 func _ready():
 	$AnimatedSprite.animation = "idle-unclothed"
@@ -29,8 +30,22 @@ func get_input(var delta):
 			if treecollider.allowMined == true:
 				treecollider.durability -= 1
 				treecollider.get_node_or_null("axeSound").playing = true
-			
-			print(treecollider.durability)
+		
+		if Globals.aboveTileMap != null:
+			if Globals.harvestMode == true:
+				if Globals.aboveTileMap == 0:
+					$PGUI/PlayerInventory.addItem(0, true)
+					# Sieve grass from ground and spawn it below the player.
+				
+	if Input.is_action_just_pressed("inventory"):
+		if isInventory == false:
+			isInventory = true
+			$PGUI/PlayerInventory.visible = true
+			return
+		if isInventory == true:
+			isInventory = false
+			$PGUI/PlayerInventory.visible = false	
+			return
 		
 	
 	
@@ -77,6 +92,11 @@ func _physics_process(delta):
 				Globals.playerHunger -= 0.01 / 2
 			if Globals.playerThirst > 0:
 				Globals.playerThirst -= 0.01 / 4
+		else:
+			if Globals.playerHunger > 0:
+				Globals.playerHunger -= 0.01 / 8
+			if Globals.playerThirst > 0:
+				Globals.playerThirst -= 0.01 / 6
 				
 		if Globals.playerThirst < 0:
 			Globals.playerThirst = 0
