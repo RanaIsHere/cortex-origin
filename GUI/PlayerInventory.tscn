@@ -9,15 +9,15 @@ size = 64
 outline_size = 1
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.572549, 0.235294, 0.905882, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="StyleBoxLine" id=5]
+[sub_resource type="StyleBoxLine" id=4]
 color = Color( 0.490196, 0.290196, 0.913725, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxEmpty" id=5]
 
 [node name="PlayerInventory" type="Control"]
 anchor_left = 0.5
@@ -28,6 +28,7 @@ margin_left = -512.0
 margin_top = -300.0
 margin_right = 512.0
 margin_bottom = 300.0
+mouse_filter = 1
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,6 +40,9 @@ margin_top = 8.0
 margin_right = 1012.0
 margin_bottom = 593.0
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="InnerInventory" type="Label" parent="InventoryPanel"]
 margin_left = 31.5336
@@ -58,13 +62,15 @@ anchor_bottom = 0.75
 margin_top = -3.8147e-06
 margin_right = 935.0
 margin_bottom = 211.0
-custom_styles/selected_focus = SubResource( 4 )
+mouse_filter = 1
+custom_styles/selected_focus = SubResource( 2 )
 custom_styles/bg_focus = SubResource( 3 )
-custom_styles/selected = SubResource( 5 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/selected = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 allow_reselect = true
+allow_rmb_select = true
 auto_height = true
 max_columns = 20
 same_column_width = true
@@ -92,7 +98,7 @@ margin_top = -3.8147e-06
 margin_right = 935.0
 margin_bottom = 138.0
 custom_styles/bg_focus = SubResource( 3 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/bg = SubResource( 5 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 allow_reselect = true
@@ -103,4 +109,6 @@ icon_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="item_rmb_selected" from="InventoryPanel/InnerInventory/InventoryList" to="." method="_on_InventoryList_item_rmb_selected"]
 [connection signal="item_selected" from="InventoryPanel/InnerInventory/InventoryList" to="." method="_on_InventoryList_item_selected"]
+[connection signal="nothing_selected" from="InventoryPanel/InnerInventory/InventoryList" to="." method="_on_InventoryList_nothing_selected"]

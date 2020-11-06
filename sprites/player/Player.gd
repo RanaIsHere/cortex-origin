@@ -4,6 +4,7 @@ var velocity = Vector2.ZERO
 var treecollider = null
 var isInventory = false
 
+
 func _ready():
 	$AnimatedSprite.animation = "idle-unclothed"
 
@@ -77,27 +78,26 @@ func _physics_process(delta):
 		get_input(delta)
 	
 	if Globals.isIntro == false:
-		if not Globals.playerTemperature > 61 or not Globals.playerTemperature < 39:
-			if Globals.playerHunger > 0:
-				Globals.playerHunger -= 0.01 / 2
-			if Globals.playerThirst > 0:
-				Globals.playerThirst -= 0.01 / 8
-		elif Globals.playerTemperature > 61:
+		if Globals.playerTemperature > 61:
 			if Globals.playerHunger > 0:
 				Globals.playerHunger -= 0.01 / 4
 			if Globals.playerThirst > 0:
 				Globals.playerThirst -= 0.01 / 2
+			#print("hot")
 		elif Globals.playerTemperature < 39:
 			if Globals.playerHunger > 0:
 				Globals.playerHunger -= 0.01 / 2
 			if Globals.playerThirst > 0:
 				Globals.playerThirst -= 0.01 / 4
+			#print("cold")
 		else:
 			if Globals.playerHunger > 0:
-				Globals.playerHunger -= 0.01 / 8
+				Globals.playerHunger -= 0.01 / 10
 			if Globals.playerThirst > 0:
-				Globals.playerThirst -= 0.01 / 6
-				
+				Globals.playerThirst -= 0.01 / 8
+			
+			#print("normal")
+			
 		if Globals.playerThirst < 0:
 			Globals.playerThirst = 0
 		if Globals.playerHunger < 0:
@@ -107,7 +107,23 @@ func _physics_process(delta):
 			Globals.playerHealth -= 1
 			
 		#print(Globals.playerHunger)
+#func dropper():
+#	if Globals.dropBuffer.has("Grass"):
+#		Globals.dropBuffer["Grass"] -= 1
+##		var g = itemGrass.instance()
+#			
+#		add_child(g)
+#		g.position = position
+#		g.rotation_degrees = rotation_degrees
+	#	print(g.position)
+	#	
+#		if Globals.dropBuffer["Grass"] == 0 or Globals.dropBuffer["Grass"] <= -1:
+#			Globals.dropBuffer.erase("Grass")
+#			
+#		print(Globals.dropBuffer)
+			
 
+	
 func _on_rangeArea_body_entered(body):
 	if body.is_in_group("trees"):
 		body.allowMined = true
