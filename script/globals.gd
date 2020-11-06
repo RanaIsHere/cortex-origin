@@ -5,9 +5,14 @@ var inventory : Array = ["Grass", "Stone", "Dirt", "Rock"]
 var itemHotbar : Array = ["Sword", "Pickaxe"]
 var dropBuffer : Dictionary = {}
 var pickBuffer : Dictionary = {}
+
+var UIHotbar : Array = []
+
 var wood : int = 0
 var metal : int = 0
 var rawMeat : int = 0
+
+var droppedItemArray : Array = []
 
 # Player
 var playerHealth = 100
@@ -28,3 +33,4 @@ var harvestMode = false
 # World
 var isFirstDoor : bool = false
 var aboveTileMap = null
+
