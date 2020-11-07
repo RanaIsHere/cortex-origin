@@ -1,13 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://GUI/inventory/playerInventoryBackground.png" type="Texture" id=1]
-[ext_resource path="res://GUI/Silver.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://GUI/crafting/playerInventoryBackground.png" type="Texture" id=1]
+[ext_resource path="res://GUI/GUITitleFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://GUI/PlayerInventory.gd" type="Script" id=3]
-
-[sub_resource type="DynamicFont" id=1]
-size = 64
-outline_size = 1
-font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.572549, 0.235294, 0.905882, 1 )
@@ -45,11 +40,11 @@ __meta__ = {
 }
 
 [node name="InnerInventory" type="Label" parent="InventoryPanel"]
-margin_left = 31.5336
-margin_top = 9.67031
-margin_right = 207.534
-margin_bottom = 81.6703
-custom_fonts/font = SubResource( 1 )
+margin_left = 32.0
+margin_top = 10.0
+margin_right = 208.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "INVENTORY"
 __meta__ = {
@@ -79,33 +74,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotbar" type="Label" parent="InventoryPanel"]
+[node name="TipsLabel" type="Label" parent="InventoryPanel"]
 margin_left = 31.5336
-margin_top = 290.428
+margin_top = 291.487
 margin_right = 207.534
-margin_bottom = 362.428
-custom_fonts/font = SubResource( 1 )
+margin_bottom = 363.487
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "HOTBAR"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotbarList" type="ItemList" parent="InventoryPanel/Hotbar"]
-anchor_top = 0.75
-anchor_bottom = 0.75
-margin_top = -3.8147e-06
-margin_right = 935.0
-margin_bottom = 138.0
-custom_styles/bg_focus = SubResource( 3 )
-custom_styles/bg = SubResource( 5 )
-custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-allow_reselect = true
-auto_height = true
-max_columns = 20
-same_column_width = true
-icon_mode = 0
+text = "TIPS:
+Right click to drop items.
+Double click to use items."
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -18,7 +18,7 @@ func _ready():
 	
 	randomize()
 
-func _process(delta):
+func _process(_delta):
 	var tm = $worldMap.world_to_map($Player.global_position)
 	var tl = $worldMap.get_cellv(Vector2(tm.x, tm.y))
 	Globals.aboveTileMap = tl
@@ -34,7 +34,18 @@ func _process(delta):
 	else:
 		Globals.playerSpeed = 200
 		Globals.playerTemperature = forestTemp
-	
+		
+	match tl: #Walking Sounds
+		0:
+			Globals.isWalkingOn = "grass"
+		1:
+			Globals.isWalkingOn = "grass"
+		3:
+			Globals.isWalkingOn = "metal"
+		4:
+			Globals.isWalkingOn = "metal"
+		6:
+			Globals.isWalkingOn = "water"
 	
 	
 	

@@ -3,7 +3,8 @@ extends KinematicBody2D
 var velocity = Vector2.ZERO
 var treecollider = null
 var isInventory = false
-
+var isCrafting = false
+var isUpgrading = false
 
 func _ready():
 	$AnimatedSprite.animation = "idle-unclothed"
@@ -47,7 +48,26 @@ func get_input(var delta):
 			isInventory = false
 			$PGUI/PlayerInventory.visible = false	
 			return
-		
+			
+	if Input.is_action_just_pressed("craft"):
+		if isCrafting == false:
+			isCrafting = true
+			$PGUI/PlayerCrafting.visible = true
+			return
+		if isCrafting == true:
+			isCrafting = false
+			$PGUI/PlayerCrafting.visible = false	
+			return
+	
+	if Input.is_action_just_pressed("upgrade"):
+		if isUpgrading == false:
+			isUpgrading = true
+			$PGUI/PlayerUpgrade.visible = true
+			return
+		if isUpgrading == true:
+			isUpgrading = false
+			$PGUI/PlayerUpgrade.visible = false	
+			return
 	
 	
 	if treecollider != null:
@@ -64,11 +84,33 @@ func get_input(var delta):
 			$AnimatedSprite.animation = "walk-unclothed"
 		elif Globals.playerEquipment == "labcoat":
 			$AnimatedSprite.animation = "walk-labcoat"
+			
+		match Globals.isWalkingOn:
+			"grass":
+				if $grassWalkSound.is_playing() == false:
+					$grassWalkSound.playing = true
+			"metal":
+				if $grassWalkSound.is_playing() == true: #Precaution
+					$grassWalkSound.playing = false
+			"water":
+				if $grassWalkSound.is_playing() == true: #Precaution
+					$grassWalkSound.playing = false
 	else:
 		if Globals.playerEquipment == "unclothed":
 			$AnimatedSprite.animation = "idle-unclothed"
 		elif Globals.playerEquipment == "labcoat":
 			$AnimatedSprite.animation = "idle-labcoat"
+		
+		match Globals.isWalkingOn:
+			"grass":
+				if $grassWalkSound.is_playing() == true:
+					$grassWalkSound.playing = false
+			"metal":
+				if $grassWalkSound.is_playing() == true: #Precaution
+					$grassWalkSound.playing = false
+			"water":
+				if $grassWalkSound.is_playing() == true: # Precaution
+					$grassWalkSound.playing = false
 		
 	velocity = velocity.normalized()
 	velocity = move_and_slide(velocity * Globals.playerSpeed, velocity)
@@ -107,22 +149,6 @@ func _physics_process(delta):
 			Globals.playerHealth -= 1
 			
 		#print(Globals.playerHunger)
-#func dropper():
-#	if Globals.dropBuffer.has("Grass"):
-#		Globals.dropBuffer["Grass"] -= 1
-##		var g = itemGrass.instance()
-#			
-#		add_child(g)
-#		g.position = position
-#		g.rotation_degrees = rotation_degrees
-	#	print(g.position)
-	#	
-#		if Globals.dropBuffer["Grass"] == 0 or Globals.dropBuffer["Grass"] <= -1:
-#			Globals.dropBuffer.erase("Grass")
-#			
-#		print(Globals.dropBuffer)
-			
-
 	
 func _on_rangeArea_body_entered(body):
 	if body.is_in_group("trees"):

@@ -209,7 +209,7 @@ __meta__ = {
 position = Vector2( 435.905, 166.002 )
 scale = Vector2( 3.274, 3.274 )
 frames = SubResource( 14 )
-frame = 4
+frame = 1
 speed_scale = 0.5
 playing = true
 

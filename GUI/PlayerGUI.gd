@@ -3,9 +3,9 @@ extends Control
 var mainResourcePick = 0
 
 func _ready():
-	$Wood.visible = false
-	$Metal.visible = false
-	$Meat.visible = false
+	$MainResPanel/Wood.visible = false
+	$MainResPanel/Metal.visible = false
+	$MainResPanel/Meat.visible = false
 
 func _process(_delta):
 	#$HealthBar.value = Globals.playerHealth
@@ -35,9 +35,9 @@ func _process(_delta):
 	if Globals.playerAnomaly > $AnomalyBar.value:
 		$AnomalyBar.value += 1
 	
-	$Wood/WoodLabel.text = "Wood: " + str(Globals.wood)
-	$Metal/MetalLabel.text = "Metal: " + str(Globals.metal)
-	$Meat/MeatLabel.text = "Meat: " + str(Globals.rawMeat)
+	$MainResPanel/Wood/WoodLabel.text = "Wood: " + str(Globals.wood)
+	$MainResPanel/Metal/MetalLabel.text = "Metal: " + str(Globals.metal)
+	$MainResPanel/Meat/MeatLabel.text = "Meat: " + str(Globals.rawMeat)
 	
 	if Input.is_action_just_pressed("hotbarMain"):
 		mainResourcePick += 1
@@ -48,27 +48,27 @@ func _process(_delta):
 	if Input.is_action_just_pressed("harvest"):
 		if Globals.harvestMode == false:
 			Globals.harvestMode = true
-			$HarvestMode.text = "Harvest Mode: On"
+			$MainResPanel/HarvestMode.text = "Harvest Mode: On"
 			return
 			
 		if Globals.harvestMode == true:
 			Globals.harvestMode = false
-			$HarvestMode.text = "Harvest Mode: Off"
+			$MainResPanel/HarvestMode.text = "Harvest Mode: Off"
 			return
 		
 	#print(Globals.harvestMode)
 	
 	match mainResourcePick:
 		0:
-			$Wood.visible = true
-			$Metal.visible = false
-			$Meat.visible = false
+			$MainResPanel/Wood.visible = true
+			$MainResPanel/Metal.visible = false
+			$MainResPanel/Meat.visible = false
 		1:
-			$Metal.visible = true
-			$Wood.visible = false
-			$Meat.visible = false
+			$MainResPanel/Metal.visible = true
+			$MainResPanel/Wood.visible = false
+			$MainResPanel/Meat.visible = false
 		2:
-			$Meat.visible = true
-			$Metal.visible = false
-			$Wood.visible = false
+			$MainResPanel/Meat.visible = true
+			$MainResPanel/Metal.visible = false
+			$MainResPanel/Wood.visible = false
 		
